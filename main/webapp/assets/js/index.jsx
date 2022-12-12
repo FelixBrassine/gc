@@ -1,31 +1,29 @@
+let refresh = true;
+
 function playWar(){
-    let main = document.getElementsByTagName("main");
-    let board = document.createElement("div");
-    main.appendChild(board);
-    board.setAttribute("id","board");
-
-    let deck = document.createElement("div");
-    main.appendChild(deck);
-    deck.setAttribute("id","deck");
-
-    let game = document.createElement("div");
-    main.appendChild(game);
-    deck.setAttribute("id","game");
+    start();
 }
 
 function playKlondike(){
+    start();
+}
 
-    let main = document.getElementsByTagName("main");
+function start (){
+    if (!refresh) {
+        return;
+    }
+
     let board = document.createElement("div");
-    main.appendChild(board);
-    board.setAttribute("id","board");
-
     let deck = document.createElement("div");
-    main.appendChild(deck);
-    deck.setAttribute("id","deck");
-
     let game = document.createElement("div");
-    main.appendChild(game);
-    deck.setAttribute("id","game");
 
+    board.setAttribute("id","board");
+    deck.setAttribute("id","deck");
+    game.setAttribute("id","game");
+
+    main.appendChild(board);
+    main.appendChild(deck);
+    main.appendChild(game);
+
+    refresh = false;
 }

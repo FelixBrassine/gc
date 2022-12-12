@@ -14,7 +14,7 @@
         <header>
             <%@ include file="/game/header.jsp" %>
         </header>
-        <main>
+        <main id="main">
 
         </main>
         <footer>
