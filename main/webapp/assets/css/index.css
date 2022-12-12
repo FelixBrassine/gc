@@ -1,0 +1,60 @@
+h1 {
+    color: darkcyan;;
+    font-size: xx-large;
+    font-weight: bolder;
+    margin: auto;
+    padding : 2%;
+}
+
+header {
+    display: flex;
+    justify-content: space-around;
+    padding : 2%;
+}
+
+button {
+    border-radius: 15px;
+    background-color: darkcyan;
+    color: white;
+    font-size: larger;
+    text-decoration: none;
+    font-weight: bolder;
+    margin : auto;
+    padding : 10px 60px;
+    cursor: pointer;
+}
+
+main {
+    display : flex;
+    justify-content: flex-start;
+    border: 2px solid black;
+    padding : 2%;
+}
+
+#board {
+    display : flex;
+    background-color : green;
+    width : 400px;
+    heignt : 400px;
+    border: 2px solid black;
+}
+
+#deck {
+    background-image: url("./image/deck.png");
+    background-size: cover;
+    margin: auto;
+    border: 2px solid black;
+}
+
+#game {
+    display: flex;
+    justify-content: space-around;
+    border: 2px solid black;
+}
+
+#result {
+    display: flex;
+    justify-content: space-around;
+    border: 2px solid black;
+}
+
