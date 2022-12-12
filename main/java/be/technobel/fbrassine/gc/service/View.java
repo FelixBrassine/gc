@@ -1,6 +1,6 @@
 package be.technobel.fbrassine.gc.service;
 
-import be.technobel.fbrassine.gc.servlets.GameController;
+import be.technobel.fbrassine.gc.service.GameController;
 import be.technobel.fbrassine.gc.model.Player;;
 
 public class View {

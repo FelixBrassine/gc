@@ -1,4 +1,4 @@
-package be.technobel.fbrassine.gc.servlets;
+package be.technobel.fbrassine.gc.service;
 
 import be.technobel.fbrassine.gc.service.View;
 import be.technobel.fbrassine.gc.model.Deck;
