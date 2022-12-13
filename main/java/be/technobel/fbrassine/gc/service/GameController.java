@@ -1,6 +1,5 @@
 package be.technobel.fbrassine.gc.service;
 
-import be.technobel.fbrassine.gc.service.View;
 import be.technobel.fbrassine.gc.model.Deck;
 import be.technobel.fbrassine.gc.model.Player;
 import be.technobel.fbrassine.gc.model.PlayingCard;
@@ -9,9 +8,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class GameController {
-    enum GameState{
-        AddingPlayers, CardsDealt, WinnerRevealed;
-    }
     Deck deck;
     List<Player> players;
     Player winner;
@@ -22,33 +18,33 @@ public class GameController {
         this.deck = deck;
         this.view = view;
         players = new ArrayList<Player>();
-        this.gameState = GameState.AddingPlayers;
+        this.gameState = GameState.ADDINGPLAYERS;
         view.setController(this);
     }
     public void run(){
-        if (gameState ==  GameState.AddingPlayers){
+        if (gameState ==  GameState.ADDINGPLAYERS){
             view.newPlayer();
-        } else if (gameState == GameState.CardsDealt) {
+        } else if (gameState == GameState.CARDSDEALT) {
             view.cardFlip();
         } else {
             view.newGame();
         }
     }
     public void addPlayer( Player p){
-        if (gameState == GameState.AddingPlayers){
+        if (gameState == GameState.ADDINGPLAYERS){
             players.add(p);
             view.showPlayerName(players.size(), p);
         }
     }
     public void startGame(){
-        if (gameState != GameState.CardsDealt){
+        if (gameState != GameState.CARDSDEALT){
             deck.shuffle();
             for (Player player : players){
                 int playerIndex = 1;
                 player.addCardToHand(deck.removeTopCard());
                 view.showCardBack(playerIndex++, player.getName());
             }
-            gameState = GameState.CardsDealt;
+            gameState = GameState.CARDSDEALT;
         }
         this.run();
     }
@@ -62,7 +58,7 @@ public class GameController {
         evaluateWinner();
         displayWinner();
         rebuildDeck();
-        gameState = GameState.WinnerRevealed;
+        gameState = GameState.WINNERREVEALD;
         this.run();
     }
     public void evaluateWinner(){
