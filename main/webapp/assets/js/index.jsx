@@ -22,8 +22,8 @@ function start (){
     game.setAttribute("id","game");
 
     main.appendChild(board);
-    main.appendChild(deck);
-    main.appendChild(game);
+    board.appendChild(deck);
+    board.appendChild(game);
 
     refresh = false;
 }
