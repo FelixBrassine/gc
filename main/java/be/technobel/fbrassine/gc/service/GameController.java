@@ -12,6 +12,7 @@ public class GameController {
     private List<Player> players;
     private Player winner;
     private GameState gameState;
+    private List<PlayingCard> flipCards = new ArrayList<>();
 
     public GameController(Deck deck) {
         this.deck = deck;
@@ -43,16 +44,19 @@ public class GameController {
         }
         this.run();
     }
-    public void flipCards(){
+    public List<PlayingCard> flipCards(){
         for (Player player : players){
             int playerIndex = 1;
             PlayingCard pc = player.getCardToHand(0);
             pc.flip();
+            flipCards.add(player.getCardToHand(playerIndex-1));
+            return flipCards;
         }
         evaluateWinner();
         rebuildDeck();
         gameState = GameState.WINNERREVEALD;
         this.run();
+        return flipCards;
     }
     public void evaluateWinner(){
         Player bestPlayer = null;
@@ -90,5 +94,9 @@ public class GameController {
             deck.returnCardToDeck(player.removeCardToHand());
             player.removeCardToHand();
         }
+    }
+
+    public List<PlayingCard> getFlipCards() {
+        return new ArrayList<>(flipCards);
     }
 }

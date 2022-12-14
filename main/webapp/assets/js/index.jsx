@@ -1,28 +1,47 @@
-var refresh = true;
+
+// <% int suit = (int) request.getAttribute("suit"); %>
+// <% int rank = (int) request.getAttribute("rank"); %>
+
+
+let gameSelected = false;
+let cardsDealt = false;
 
 function playWar(){
     start();
     let deck = document.getElementById("deck");
     let request = new XMLHttpRequest();
     request.open("GET", "gc/war" );
+//     let suit = request.getAttribute("suit");
+//     let rank = request.getAttribute("rank");
     deck.setAttribute("onclick", "war()");
+
+    let cardBack = document.getElementsByClassName("cardBack");
+    cardBack.setAttribute("onclick", "flipCard()");
+//     cardBack.setAttribute("src","/gc/assets/image/cards <%= suit %><%= rank %>.png");
+//     cardBack.setAttribute("src","/gc/assets/image/cards"+suit+rank+".png");
+}
+
+function flipCard(){
+    console.log("ok");
 }
 
 function war() {
+    if (cardsDealt){
+        return;
+    }
     cardBack();
     cardBack();
+    cardsDealt = true;
 }
 
 function playKlondike(){
     start();
-
 }
 
 function start(){
-    if (!refresh) {
+    if (gameSelected) {
         return;
     }
-
     let board = document.createElement("div");
     let deck = document.createElement("div");
     let imgDeck = document.createElement("img");
@@ -38,7 +57,7 @@ function start(){
     board.appendChild(deck);
     deck.appendChild(imgDeck);
     board.appendChild(game);
-    refresh = false;
+    gameSelected = true;
 }
 
 function cardBack(){

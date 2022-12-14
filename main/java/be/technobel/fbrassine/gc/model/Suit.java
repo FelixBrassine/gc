@@ -14,4 +14,5 @@ public enum Suit {
     public int value(){
         return suit;
     }
+
 }
