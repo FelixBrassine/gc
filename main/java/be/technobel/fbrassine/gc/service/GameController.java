@@ -8,32 +8,28 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class GameController {
-    Deck deck;
-    List<Player> players;
-    Player winner;
-    View view;
-    GameState gameState;
+    private Deck deck;
+    private List<Player> players;
+    private Player winner;
+    private GameState gameState;
 
-    public GameController(Deck deck, View view) {
+    public GameController(Deck deck) {
         this.deck = deck;
-        this.view = view;
         players = new ArrayList<Player>();
         this.gameState = GameState.ADDINGPLAYERS;
-        view.setController(this);
     }
     public void run(){
         if (gameState ==  GameState.ADDINGPLAYERS){
-            view.newPlayer();
+
         } else if (gameState == GameState.CARDSDEALT) {
-            view.cardFlip();
+
         } else {
-            view.newGame();
+
         }
     }
     public void addPlayer( Player p){
         if (gameState == GameState.ADDINGPLAYERS){
             players.add(p);
-            view.showPlayerName(players.size(), p);
         }
     }
     public void startGame(){
@@ -42,7 +38,6 @@ public class GameController {
             for (Player player : players){
                 int playerIndex = 1;
                 player.addCardToHand(deck.removeTopCard());
-                view.showCardBack(playerIndex++, player.getName());
             }
             gameState = GameState.CARDSDEALT;
         }
@@ -53,10 +48,8 @@ public class GameController {
             int playerIndex = 1;
             PlayingCard pc = player.getCardToHand(0);
             pc.flip();
-            view.showCardFace(playerIndex++, player.getName(), pc.getRank().toString(), pc.getSuit().toString());
         }
         evaluateWinner();
-        displayWinner();
         rebuildDeck();
         gameState = GameState.WINNERREVEALD;
         this.run();
@@ -91,9 +84,6 @@ public class GameController {
             }
 
         }
-    }
-    public void displayWinner(){
-        view.showWinner(winner.getName());
     }
     public void rebuildDeck(){
         for (Player player : players){
