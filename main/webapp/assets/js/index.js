@@ -19,7 +19,6 @@ function getsuitRank(){
         if(xhr.readyState === 4 && xhr.status === 200) {
             console.log(xhr.responseText);
             let cardBack = document.querySelector(".cardBack");
-//            let cardBack = document.getElementsByClassName("cardBack");
             cardBack.setAttribute("onclick", "flipCard()");
             cardBack.setAttribute("src","/gc/assets/image/cards"+xhr.responseText+".jpg");
         }
