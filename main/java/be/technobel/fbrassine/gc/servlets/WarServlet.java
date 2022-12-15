@@ -24,21 +24,18 @@ public class WarServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-        resp.setContentType("/js/index.jsx");
-        resp.setCharacterEncoding("UTF-8");
-        PrintWriter out = resp.getWriter();
-
         Deck deck = new Deck();
         GameController gc = new GameController(deck);
-        gc.run();
         Player p = new Player("Player");
         gc.addPlayer(p);
+        gc.startGame();
+        PlayingCard pc = p.getCardToHand(0);
 
-        List<PlayingCard> flipCards = gc.flipCards();
-        String rankSuit = this.gson.toJson((flipCards.get(0).getSuit().value() *100) + flipCards.get(0).getRank().value());
-//        resp.getWriter().append(rankSuit);
-        out.print(rankSuit);
-        out.flush();
-        out.close();
+        int rankSuit = (pc.getSuit().value() *100) + pc.getRank().value();
+
+        StringBuffer returnRankSuit = new StringBuffer();
+        returnRankSuit.append(rankSuit);
+        resp.setContentType("application/json");
+        resp.getWriter().write(String.valueOf(returnRankSuit));
     }
 }

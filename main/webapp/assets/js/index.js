@@ -3,21 +3,29 @@ let cardsDealt = false;
 
 function playWar(){
     start();
+
     let deck = document.getElementById("deck");
-    let request = new XMLHttpRequest();
-    request.open("GET", "gc/war" );
-    request.send();
-    request.responseType = "json";
-    let rankSuit = JSON.stringify(request.response);
-    console.log(rankSuit);
-
     deck.setAttribute("onclick", "war()");
+    document.getElementById("deck").addEventListener("click", getsuitRank);
 
-    let cardBack = document.getElementsByClassName("cardBack");
-    cardBack.setAttribute("onclick", "flipCard()");
-    cardBack.setAttribute("src","/gc/assets/image/cards"+suitRank+".png");
 }
 
+function getsuitRank(){
+    var xhr = new XMLHttpRequest(),
+        method = "GET",
+        url = "/gc/war";
+    xhr.open(method, url, true);
+    xhr.onreadystatechange = function () {
+        if(xhr.readyState === 4 && xhr.status === 200) {
+            console.log(xhr.responseText);
+            let cardBack = document.querySelector(".cardBack");
+//            let cardBack = document.getElementsByClassName("cardBack");
+            cardBack.setAttribute("onclick", "flipCard()");
+            cardBack.setAttribute("src","/gc/assets/image/cards"+xhr.responseText+".jpg");
+        }
+    };
+    xhr.send();
+}
 function flipCard(){
     console.log("ok");
 }

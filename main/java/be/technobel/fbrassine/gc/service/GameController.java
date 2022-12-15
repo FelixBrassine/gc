@@ -19,43 +19,29 @@ public class GameController {
         players = new ArrayList<Player>();
         this.gameState = GameState.ADDINGPLAYERS;
     }
-    public void run(){
-        if (gameState ==  GameState.ADDINGPLAYERS){
-
-        } else if (gameState == GameState.CARDSDEALT) {
-
-        } else {
-
-        }
-    }
     public void addPlayer( Player p){
-        if (gameState == GameState.ADDINGPLAYERS){
             players.add(p);
-        }
     }
     public void startGame(){
         if (gameState != GameState.CARDSDEALT){
             deck.shuffle();
             for (Player player : players){
-                int playerIndex = 1;
                 player.addCardToHand(deck.removeTopCard());
             }
             gameState = GameState.CARDSDEALT;
         }
-        this.run();
     }
     public List<PlayingCard> flipCards(){
         for (Player player : players){
             int playerIndex = 1;
             PlayingCard pc = player.getCardToHand(0);
             pc.flip();
-            flipCards.add(player.getCardToHand(playerIndex-1));
+            flipCards.add(pc);
             return flipCards;
         }
         evaluateWinner();
         rebuildDeck();
         gameState = GameState.WINNERREVEALD;
-        this.run();
         return flipCards;
     }
     public void evaluateWinner(){

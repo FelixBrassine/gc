@@ -23,6 +23,6 @@
         <footer>
             <%@ include file="/game/footer.jsp" %>
         </footer>
-            <script src="/gc/assets/js/index.jsx"></script>
+            <script src="/gc/assets/js/index.js"></script>
      </body>
 </html>
