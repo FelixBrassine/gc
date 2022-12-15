@@ -1,8 +1,3 @@
-
-// <% int suit = (int) request.getAttribute("suit"); %>
-// <% int rank = (int) request.getAttribute("rank"); %>
-
-
 let gameSelected = false;
 let cardsDealt = false;
 
@@ -11,14 +6,16 @@ function playWar(){
     let deck = document.getElementById("deck");
     let request = new XMLHttpRequest();
     request.open("GET", "gc/war" );
-//     let suit = request.getAttribute("suit");
-//     let rank = request.getAttribute("rank");
+    request.send();
+    request.responseType = "json";
+    let rankSuit = JSON.stringify(request.response);
+    console.log(rankSuit);
+
     deck.setAttribute("onclick", "war()");
 
     let cardBack = document.getElementsByClassName("cardBack");
     cardBack.setAttribute("onclick", "flipCard()");
-//     cardBack.setAttribute("src","/gc/assets/image/cards <%= suit %><%= rank %>.png");
-//     cardBack.setAttribute("src","/gc/assets/image/cards"+suit+rank+".png");
+    cardBack.setAttribute("src","/gc/assets/image/cards"+suitRank+".png");
 }
 
 function flipCard(){
