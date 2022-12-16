@@ -6,6 +6,8 @@ function playWar(){
 
     let deck = document.getElementById("deck");
     deck.setAttribute("onclick", "war()");
+//    let cardBack = document.querySelector(".cardBack");
+//    cardBack.setAttribute("onclick", "getsuitRank()");
     document.getElementById("deck").addEventListener("click", getsuitRank);
 
 }
@@ -20,7 +22,8 @@ function getsuitRank(){
             console.log(xhr.responseText);
             let cardBack = document.querySelector(".cardBack");
             cardBack.setAttribute("onclick", "flipCard()");
-            cardBack.setAttribute("src","/gc/assets/image/cards"+xhr.responseText+".jpg");
+            cardBack.setAttribute("class","cardFace");
+            cardBack.setAttribute("src","/gc/assets/image/card"+xhr.responseText+".svg");
         }
     };
     xhr.send();

@@ -30,7 +30,6 @@ public class WarServlet extends HttpServlet {
         gc.addPlayer(p);
         gc.startGame();
         PlayingCard pc = p.getCardToHand(0);
-
         int rankSuit = (pc.getSuit().value() *100) + pc.getRank().value();
 
         StringBuffer returnRankSuit = new StringBuffer();
