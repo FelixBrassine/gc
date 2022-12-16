@@ -1,48 +1,43 @@
 let gameSelected = false;
 let cardsDealt = false;
+let nbPlayer;
 
 function playWar(){
     start();
-
+    nbPlayer = 2;
     let deck = document.getElementById("deck");
-    deck.setAttribute("onclick", "war()");
-//    let cardBack = document.querySelector(".cardBack");
-//    cardBack.setAttribute("onclick", "getsuitRank()");
-    document.getElementById("deck").addEventListener("click", getsuitRank);
+    deck.setAttribute("onclick", "getsuitRank()");
+
 
 }
 
 function getsuitRank(){
-    var xhr = new XMLHttpRequest(),
-        method = "GET",
-        url = "/gc/war";
-    xhr.open(method, url, true);
-    xhr.onreadystatechange = function () {
-        if(xhr.readyState === 4 && xhr.status === 200) {
-            console.log(xhr.responseText);
-            let cardBack = document.querySelector(".cardBack");
-            cardBack.setAttribute("onclick", "flipCard()");
-            cardBack.setAttribute("class","cardFace");
-            cardBack.setAttribute("src","/gc/assets/image/card"+xhr.responseText+".svg");
-        }
-    };
-    xhr.send();
-}
-function flipCard(){
-    console.log("ok");
-}
-
-function war() {
-    if (cardsDealt){
+    if (cardsDealt) {
         return;
-    }
-    cardBack();
-    cardBack();
-    cardsDealt = true;
-}
+    } else if (nbPlayer>0){
+        nbPlayer -= 1;
+        var xhr = new XMLHttpRequest(),
+            method = "GET",
+            url = "/gc/cardsDealt";
+        xhr.open(method, url, true);
+        xhr.onreadystatechange = function () {
+            if(xhr.readyState === 4 && xhr.status === 200) {
+                console.log(xhr.responseText);
+                let game = document.getElementById("game");
+                let cardBackCont = document.createElement("div");
+                let cardBack = document.createElement("img");
 
-function playKlondike(){
-    start();
+                game.appendChild(cardBackCont);
+                cardBackCont.appendChild(cardBack);
+                cardBackCont.setAttribute("class", "cardBackCont");
+                cardBack.setAttribute("src","/gc/assets/image/card"+xhr.responseText+".svg");
+            }
+        };
+        xhr.send();
+    }else{
+        cardsDealt = true;
+    }
+
 }
 
 function start(){
@@ -56,7 +51,7 @@ function start(){
 
     board.setAttribute("id","board");
     deck.setAttribute("id","deck");
-    imgDeck.setAttribute("src","/gc/assets/image/deck2.png");
+    imgDeck.setAttribute("src","/gc/assets/image/deck.png");
     imgDeck.setAttribute("id","imgDeck");
     game.setAttribute("id","game");
 
@@ -67,17 +62,3 @@ function start(){
     gameSelected = true;
 }
 
-function cardBack(){
-
-    let game = document.getElementById("game");
-    let cardBackCont = document.createElement("div");
-    let imgBack = document.createElement("img");
-
-    cardBackCont.setAttribute("class","cardBackCont");
-    imgBack.setAttribute("src","/gc/assets/image/deck2.png");
-    imgBack.setAttribute("class","cardBack");
-
-    game.appendChild(cardBackCont);
-    cardBackCont.appendChild(imgBack);
-
-}

@@ -12,14 +12,9 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
-import java.io.PrintWriter;
-import java.util.ArrayList;
-import java.util.List;
 
-@WebServlet("/war")
-public class WarServlet extends HttpServlet {
-
-
+@WebServlet("/cardsDealt")
+public class CardsDealtServlet extends HttpServlet {
     private Gson gson = new Gson();
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
