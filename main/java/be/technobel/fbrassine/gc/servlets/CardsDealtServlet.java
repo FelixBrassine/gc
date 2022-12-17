@@ -1,6 +1,6 @@
 package be.technobel.fbrassine.gc.servlets;
 
-import be.technobel.fbrassine.gc.model.Deck;
+import be.technobel.fbrassine.gc.model.Pile;
 import be.technobel.fbrassine.gc.model.Player;
 import be.technobel.fbrassine.gc.model.PlayingCard;
 import be.technobel.fbrassine.gc.service.GameController;
@@ -19,8 +19,8 @@ public class CardsDealtServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-        Deck deck = new Deck();
-        GameController gc = new GameController(deck);
+        Pile pile = new Pile();
+        GameController gc = new GameController(pile);
         Player p = new Player("Player");
         gc.addPlayer(p);
         gc.startGame();

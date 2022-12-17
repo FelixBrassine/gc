@@ -5,10 +5,10 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 
-public class Deck {
+public class Pile {
     private List<PlayingCard> cards;
 
-    public Deck(){
+    public Pile(){
         cards = new ArrayList<PlayingCard>();
         for (Rank rank : Rank.values()){
             for (Suit suit : Suit.values()){

@@ -5,16 +5,13 @@ let nbPlayer;
 function playWar(){
     start();
     nbPlayer = 2;
-    let deck = document.getElementById("deck");
-    deck.setAttribute("onclick", "getsuitRank()");
-
+    let imgDeck = document.getElementById("imgDeck");
+    imgDeck.setAttribute("onclick", "getsuitRank()");
 
 }
 
 function getsuitRank(){
-    if (cardsDealt) {
-        return;
-    } else if (nbPlayer>0){
+    if (nbPlayer>0) {
         nbPlayer -= 1;
         var xhr = new XMLHttpRequest(),
             method = "GET",
@@ -24,13 +21,14 @@ function getsuitRank(){
             if(xhr.readyState === 4 && xhr.status === 200) {
                 console.log(xhr.responseText);
                 let game = document.getElementById("game");
-                let cardBackCont = document.createElement("div");
-                let cardBack = document.createElement("img");
+                let cardFace = document.createElement("div");
+                let imgCardFace = document.createElement("img");
 
-                game.appendChild(cardBackCont);
-                cardBackCont.appendChild(cardBack);
-                cardBackCont.setAttribute("class", "cardBackCont");
-                cardBack.setAttribute("src","/gc/assets/image/card"+xhr.responseText+".svg");
+                cardFace.setAttribute("class", "cardFace")
+                game.appendChild(cardFace);
+                cardFace.appendChild(imgCardFace);
+                imgCardFace.setAttribute("class", "imgCardFace");
+                imgCardFace.setAttribute("src","/gc/assets/image/card"+xhr.responseText+".svg");
             }
         };
         xhr.send();
@@ -44,21 +42,32 @@ function start(){
     if (gameSelected) {
         return;
     }
-    let board = document.createElement("div");
-    let deck = document.createElement("div");
-    let imgDeck = document.createElement("img");
-    let game = document.createElement("div");
+    let main = document.getElementById("main");
+        let board = document.createElement("div");
+            let topBoard = document.createElement("div");
+                let deck = document.createElement("div");
+                let imgDeck = document.createElement("img");
+                let treat = document.createElement("div");
+                let imgTreat = document.createElement("img");
+            let game = document.createElement("div");
 
-    board.setAttribute("id","board");
-    deck.setAttribute("id","deck");
-    imgDeck.setAttribute("src","/gc/assets/image/deck.png");
-    imgDeck.setAttribute("id","imgDeck");
-    game.setAttribute("id","game");
+        board.setAttribute("id","board");
+            topBoard.setAttribute("id","topBoard");
+                deck.setAttribute("id","deck");
+                imgDeck.setAttribute("id", "imgDeck");
+                imgDeck.setAttribute("src", "/gc/assets/image/cardBack.png")
+                treat.setAttribute("id","treat");
+                imgTreat.setAttribute("id", "imgTreat");
+                imgTreat.setAttribute("src", "/gc/assets/image/cardBack.png")
+            game.setAttribute("id","game");
 
     main.appendChild(board);
-    board.appendChild(deck);
-    deck.appendChild(imgDeck);
-    board.appendChild(game);
+        board.appendChild(topBoard);
+            topBoard.appendChild(deck);
+                deck.appendChild(imgDeck);
+            topBoard.appendChild(treat);
+                treat.appendChild(imgTreat);
+        board.appendChild(game);
     gameSelected = true;
 }
 

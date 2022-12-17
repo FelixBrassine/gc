@@ -1,6 +1,6 @@
 package be.technobel.fbrassine.gc.service;
 
-import be.technobel.fbrassine.gc.model.Deck;
+import be.technobel.fbrassine.gc.model.Pile;
 import be.technobel.fbrassine.gc.model.Player;
 import be.technobel.fbrassine.gc.model.PlayingCard;
 
@@ -8,14 +8,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class GameController {
-    private Deck deck;
+    private Pile pile;
     private List<Player> players;
     private Player winner;
     private GameState gameState;
     private List<PlayingCard> flipCards = new ArrayList<>();
 
-    public GameController(Deck deck) {
-        this.deck = deck;
+    public GameController(Pile pile) {
+        this.pile = pile;
         players = new ArrayList<Player>();
         this.gameState = GameState.ADDINGPLAYERS;
     }
@@ -24,9 +24,9 @@ public class GameController {
     }
     public void startGame(){
         if (gameState != GameState.CARDSDEALT){
-            deck.shuffle();
+            pile.shuffle();
             for (Player player : players){
-                player.addCardToHand(deck.removeTopCard());
+                player.addCardToHand(pile.removeTopCard());
             }
             gameState = GameState.CARDSDEALT;
         }
@@ -77,7 +77,7 @@ public class GameController {
     }
     public void rebuildDeck(){
         for (Player player : players){
-            deck.returnCardToDeck(player.removeCardToHand());
+            pile.returnCardToDeck(player.removeCardToHand());
             player.removeCardToHand();
         }
     }
