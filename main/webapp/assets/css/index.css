@@ -9,7 +9,7 @@ h1 {
     font-family: 'Diplomata', cursive;
     color: white;
     -webkit-text-stroke: 1px black;
-    margin : 7%;
+    margin: 5% 5% 1%;
 }
 
 header {
@@ -34,18 +34,16 @@ header {
 
 #board {
     background-image: url("../image/mats.jpg");
-    background-size: cover;
+    background-size: contain;
     background-repeat: no-repeat;
     margin: 5%;
-    width: 70%;
-    border: 2px solid black;
-    border-radius: 15px;
+    width: 60%;
 }
 
 #topBoard {
     display: flex;
     justify-content: space-between;
-    margin: 10%;
+    margin: 15%;
 }
 
 #deck {
@@ -62,6 +60,7 @@ header {
 #imgDeck {
     width: 40%;
     cursor: pointer;
+    border: 1px solid black;
 }
 
 #imgTreat {
@@ -71,7 +70,7 @@ header {
 #game {
     display: flex;
     justify-content: space-between;
-    margin: 10%;
+    margin: 15%;
 }
 
 .cardFace {
