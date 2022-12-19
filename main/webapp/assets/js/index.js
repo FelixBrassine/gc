@@ -1,39 +1,43 @@
 let gameSelected = false;
 let cardsDealt = false;
+let winner = false;
 let nbPlayer;
-let countClick = 0;
+let counter = 0;
 
 function playWar(){
     nbPlayer = 2;
     start(nbPlayer);
-    console.log("playwar");
-    console.log(nbPlayer);
     getsuitRank();
-    let imgDeck = document.getElementById("imgDeck");
-    imgDeck.setAttribute("onclick", "getsuitRank()");
+    getsuitRank();
+    let nextRound = document.querySelector("#nextRound");
+    nextRound.style.visibility = "visible";
+    // let imgDeck = document.getElementById("imgDeck");
+    // imgDeck.setAttribute("onclick", "getsuitRank()");
+
+
+
+    let button = document.createElement("button");
+    button.setAttribute("value", "");
+    button.setAttribute("id", "buttonWin");
 
 }
 
 function getsuitRank(){
     if (nbPlayer>0) {
-        countClick ++;
-        console.log("get1");
-        console.log(nbPlayer);
-        var xhr = new XMLHttpRequest(),
+        counter ++;
+        let xhr = new XMLHttpRequest(),
             method = "GET",
             url = "/gc/cardsDealt";
         xhr.open(method, url, true);
         xhr.onreadystatechange = function () {
             if(xhr.readyState === 4 && xhr.status === 200) {
                 console.log(xhr.responseText);
-                let imgCardFace = document.getElementById("imgCardFace" +countClick);
+                let imgCardFace = document.getElementById("imgCardFace" +counter);
                 imgCardFace.setAttribute("src","/gc/assets/image/card"+xhr.responseText+".svg");
             }
-        };
+        }
         xhr.send();
         nbPlayer -= 1;
-        console.log("get2");
-        console.log(nbPlayer);
     }else{
         cardsDealt = true;
     }
@@ -78,8 +82,6 @@ function start(nbPlayer){
         imgCardFace.setAttribute("id", "imgCardFace" + i);
         game.appendChild(cardFace);
         cardFace.appendChild(imgCardFace);
-        console.log("start");
-        console.log(nbPlayer);
     }
     gameSelected = true;
 }

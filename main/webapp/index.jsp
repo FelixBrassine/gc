@@ -20,9 +20,10 @@
         <main id="main">
 
         </main>
-        <footer>
+        <footer id = footer>
             <%@ include file="/game/footer.jsp" %>
         </footer>
             <script src="/gc/assets/js/index.js"></script>
+            <script src="/gc/assets/js/footer.js"></script>
      </body>
 </html>
