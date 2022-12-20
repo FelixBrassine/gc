@@ -1,14 +1,14 @@
-let winnerReveald;
+let winner;
 let round = 2;
 function nextRound() {
     console.log(round);
-    winnerReveald = false;
+    winner = false;
     footerRound();
     pointCompare();
 
 }
 function pointCompare() {
-    var xhr = new XMLHttpRequest(),
+    let xhr = new XMLHttpRequest(),
         method = "GET",
         url = "/gc/winnerReveald";
     xhr.open(method, url, true);
@@ -22,7 +22,7 @@ function pointCompare() {
     }
     xhr.send();
     console.log(round);
-    winnerReveald = true;
+    winner = true;
     round ++;
 }
 

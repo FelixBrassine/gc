@@ -18,7 +18,6 @@
             <%@ include file="/game/header.jsp" %>
         </header>
         <main id="main">
-
         </main>
         <footer id = footer>
             <%@ include file="/game/footer.jsp" %>

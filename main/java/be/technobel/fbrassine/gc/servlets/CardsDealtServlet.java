@@ -20,6 +20,7 @@ public class CardsDealtServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
         Pile  pile = new Pile();
+
         GameController gc = new GameController(pile);
         Player p = new Player("Player");
         gc.addPlayer(p);
