@@ -14,11 +14,21 @@ public class GameController {
     private GameState gameState;
     private List<PlayingCard> flipCards = new ArrayList<>();
 
-    public GameController(Pile pile) {
-        this.pile = pile;
+    //singleton
+    private static GameController instance;
+    private GameController(){
+        this.pile = new Pile();
         players = new ArrayList<Player>();
         this.gameState = GameState.ADDINGPLAYERS;
     }
+    public static GameController getInstance() {
+        if(instance == null) {
+            instance = new GameController();
+        }
+
+        return instance;
+    }
+
     public void addPlayer( Player p){
             players.add(p);
     }
@@ -44,7 +54,7 @@ public class GameController {
         gameState = GameState.WINNERREVEALD;
         return flipCards;
     }
-    public void evaluateWinner(){
+    public Player evaluateWinner(){
         Player bestPlayer = null;
         int bestRank = -1;
         int bestSuit = -1;
@@ -74,6 +84,7 @@ public class GameController {
             }
 
         }
+        return bestPlayer;
     }
     public void rebuildDeck(){
         for (Player player : players){

@@ -2,6 +2,11 @@ let gameSelected = false;
 let cardsDealt = false;
 let nbPlayer = 2;
 let counter = 0;
+function playKlondike(){
+    if (gameSelected){
+        return;
+    }
+}
 
 function playWar(){
     if (gameSelected){
@@ -29,17 +34,17 @@ function visibleCard(){
 }
 
 function getsuitRank(imgCardFace){
-    let xhr = new XMLHttpRequest(),
+    let request = new XMLHttpRequest(),
         method = "GET",
         url = "/gc/cardsDealt";
-    xhr.open(method, url, true);
-    xhr.onreadystatechange = function () {
-        if(xhr.readyState === 4 && xhr.status === 200) {
-            console.log(xhr.responseText);
-            imgCardFace.setAttribute("src","/gc/assets/image/card"+xhr.responseText+".svg");
+    request.open(method, url, true);
+    request.onreadystatechange = function () {
+        if(request.readyState === 4 && request.status === 200) {
+            console.log(request.responseText);
+            imgCardFace.setAttribute("src","/gc/assets/image/card"+request.responseText+".svg");
         }
     }
-    xhr.send();
+    request.send();
 }
 
 function distribute(){
